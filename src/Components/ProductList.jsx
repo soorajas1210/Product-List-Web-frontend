@@ -64,7 +64,7 @@ function ProductList() {
                         <Grid container spacing={2}>
                             {products.filter((product) => category.length === 0 || category.some((cat) => product.category.includes(cat))).slice(startIndex, endIndex).map((product) => (
                                 <Grid item xs={12} sm={6} md={4} key={product.id}>
-                                    <Card sx={{ maxWidth: 345 }} style={cardStyle}>
+                                    <Card className='card' sx={{ maxWidth: 345 }} style={cardStyle}>
                                         <CardMedia
                                             sx={{ height: 200 }}
                                             image={product.image}
