@@ -1,9 +1,11 @@
-import { Button, Card, CardContent, CardMedia, Container, Dialog, DialogContent, Grid, Paper, Typography } from '@mui/material'
+import { Box, Button, CardContent, CardMedia, Container, Dialog, DialogContent, Grid, Paper, Rating, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getProducts } from '../Actions/Actions'
 import Navbar from './Navbar'
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 
 function Product() {
     const dispatch = useDispatch()
@@ -45,15 +47,28 @@ function Product() {
                                 <Typography variant="h4" gutterBottom>
                                     {product.title}
                                 </Typography>
+                                <Rating name="product-rating" value={Math.floor(product.rating.rate)} precision={0.5} readOnly />
+
                                 <Typography variant="h6" color="textSecondary" gutterBottom>
-                                    {product.price}
+                                    {"Category: " + product.category}
+                                </Typography>
+                                <Typography variant="h6" color="textSecondary" gutterBottom>
+                                    {"Rate: $" + product.price}
                                 </Typography>
                                 <Typography variant="body1" gutterBottom>
                                     {product.description}
                                 </Typography>
-                                <Button variant="contained" color="primary">
-                                    Add to Cart
-                                </Button>
+                                <Box sx={{ mt: 5, display: "flex", gap: 2 }}>
+
+                                    <Button variant="contained" color="primary"  >
+                                        <ShoppingBagOutlinedIcon />
+                                        Add to Bag
+                                    </Button>
+                                    <Button variant="contained" color="secondary">
+                                        < FavoriteBorderOutlinedIcon />
+                                        Wishlist
+                                    </Button>
+                                </Box>
                             </CardContent>
                         </Grid>
                     </Grid>

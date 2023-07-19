@@ -1,117 +1,94 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
 import { Autocomplete, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: "white",
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    color: "black",
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'black',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
-    },
-}));
-
 export default function Navbar({ products }) {
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const handleClick = (id) => {
-        console.log(id)
-        navigate(`/product/${id}`)
-
+        navigate(`/product/${id}`);
+    };
+    const toHome = () => {
+        navigate('/')
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}  >
-            <AppBar position="static" style={{ backgroundColor: "#e6e8e7" }} >
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static" style={{ backgroundColor: '#f2f7f7' }}>
                 <Toolbar>
                     <IconButton
                         size="large"
                         edge="start"
                         color="black"
                         aria-label="open drawer"
-                        sx={{ mr: 2 }}
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'block', sm: 'block', md: 'none', },
+                        }}
                     >
-                        <MenuIcon />
+                        <MenuIcon onClick={toHome} />
                     </IconButton>
+                    <Typography sx={{
+                        mr: 2,
+                        display: { flexGrow: 1, xs: 'block', sm: 'block', md: 'none', },
+                    }} ></Typography>
                     <Typography
                         variant="h6"
+                        color="black"
                         noWrap
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'none', md: 'block' }, }}
+                        style={{ cursor: "pointer" }}
+                        onClick={toHome}
                     >
-
+                        {"Home"}
                     </Typography>
 
                     <Autocomplete
                         disablePortal
                         id="combo-box-demo"
-                        options={products.map((product) => ({ title: product.title, id: Number(product.id) }))}
+                        options={products.map((product) => ({
+                            title: product.title,
+                            id: Number(product.id),
+                        }))}
                         getOptionLabel={(option) => option.title}
                         onChange={(event, value) => {
                             if (value) {
-                                // Perform your desired action with the selected option's ID
                                 handleClick(value.id);
                             }
                         }}
                         sx={{
-                            width: 300,
+                            width: { xs: 200, sm: 400 },
                             '& .MuiInputBase-root': {
                                 backgroundColor: 'white',
                                 borderRadius: 4,
+                                height: '37px',
+                                position: 'relative',
                             },
                             '& .MuiOutlinedInput-root': {
                                 borderRadius: 4,
+                                height: '37px',
                             },
                             '& .MuiInputLabel-root': {
                                 color: 'gray',
                             },
                             '& .MuiAutocomplete-option': {
-                                color: 'black',
+                                lineHeight: '1.5rem',
                             },
                         }}
-                        renderInput={(params) => <TextField {...params} label="Search..." />}
+
+                        renderInput={(params) => <TextField  {...params} label="Search..."
+                            InputLabelProps={{
+                                style: { marginTop: '-8px' },
+                            }} />}
+
+
+
                     />
                 </Toolbar>
             </AppBar>

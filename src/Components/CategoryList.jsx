@@ -1,4 +1,4 @@
-import { Box, Checkbox, Paper, Typography } from '@mui/material'
+import { Box, Checkbox, Divider, Grid, Paper, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategoryList } from '../Actions/Actions'
@@ -29,14 +29,20 @@ function CategoryList(props) {
 
     return (
         <Paper variant="outlined" sx={{ border: '1px solid #ccc', borderRadius: '4px', padding: '10px' }}>
+            <Typography variant='h5' align='center' > Categories  </Typography>
+            <Grid item>
+                <Divider sx={{ width: '100%', borderTop: '1px solid #ccc', mt: 2 }} />
+            </Grid>
             {categories.map((category) => (
-                <Box key={category} sx={{ mb: 1, display: 'flex', alignItems: 'center' }}>
-                    <Checkbox
-                        checked={selectedCategories.includes(category)}
-                        onChange={handleCategoryToggle(category)}
-                    />
+                <Grid item key={category} xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box >
+                        <Checkbox
+                            checked={selectedCategories.includes(category)}
+                            onChange={handleCategoryToggle(category)}
+                        />
+                    </Box>
                     <Typography variant="body1">{category}</Typography>
-                </Box>
+                </Grid>
             ))}
         </Paper>
     )

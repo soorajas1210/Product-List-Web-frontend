@@ -15,14 +15,12 @@ export const getProducts = () => async (dispatch) => {
       config
     );
 
-    console.log("Actions",data);
     dispatch(Success(data));
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    console.log(message);
     dispatch(Fail(message));
   }
 };
@@ -41,14 +39,12 @@ export const getCategoryList = () => async (dispatch) => {
       config
     );
 
-    console.log("category", data);
     dispatch(categorySuccess(data));
   } catch (error) {
     const message =
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    console.log(message);
     dispatch(categoryFail(message));
   }
 };
