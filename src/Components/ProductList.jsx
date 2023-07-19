@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts } from '../Actions/Actions'
-import { Card, CardContent, CardMedia, Container, Divider, Grid, Pagination, Rating, Stack, Typography } from '@mui/material'
+import { Card, CardContent, CardMedia, Container, Grid, Pagination, Rating, Stack, Typography } from '@mui/material'
 import Navbar from './Navbar'
 import { useNavigate } from 'react-router-dom'
 import CategoryList from './CategoryList'
